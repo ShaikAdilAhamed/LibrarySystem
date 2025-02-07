@@ -24,12 +24,21 @@ public class BookServiceImpl implements BookService {
 	private LibraryService libraryService;
 	@Override
 	public BookDTO saveBooks(BookDTO bookDTO) {
+		Library library= libraryService.findLibraryById(bookDTO.getLibrary_id());
+		if(library.getLibrary_id()!=null)
+		{
 		Book save = bookRepository.save(mapDtoToEntity(bookDTO));
 		return mapEntityToDto(save);
+		}
+		else {
+		    throw  new ResourseNotFoundException("saveBooks", "findLibraryById", library.getLibrary_id());
+		    
+		}
 	}
 
 	public Book mapDtoToEntity(BookDTO bookDTO) {
 		Library library= libraryService.findLibraryById(bookDTO.getLibrary_id());
+		
 		
 		Book book = new Book();
 		book.setIsbn(bookDTO.getIsbn());

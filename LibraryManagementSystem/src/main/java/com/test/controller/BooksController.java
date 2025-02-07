@@ -31,8 +31,14 @@ public class BooksController {
     @PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<BookDTO> saveBooks(@Valid @RequestBody BookDTO bookDTO)
 	{
+		try {
 		BookDTO savebooks=bookService.saveBooks(bookDTO);
 		return new ResponseEntity(savebooks,HttpStatus.OK);
+		}
+	  catch (Exception e) {
+	        // Handle the exception and return an error response
+	        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST); // Or you can include the exception message in the response body
+	    }
 	}
 	
 	@GetMapping("/getall/books")
