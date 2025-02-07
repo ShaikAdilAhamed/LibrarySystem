@@ -17,13 +17,16 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {
-
 	@Bean
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf((csrf) -> csrf.disable()).authorizeHttpRequests(
-				(auth) -> auth.requestMatchers(HttpMethod.GET, "/api/*").permitAll().anyRequest().authenticated())
-				.httpBasic(Customizer.withDefaults());
-		return http.build();
+	    http.csrf((csrf) -> csrf.disable())
+	        .authorizeHttpRequests(auth -> auth
+	            .requestMatchers(HttpMethod.GET, "/api/*").permitAll()
+	            .requestMatchers(HttpMethod.GET, "/swagger-ui.html").permitAll()
+	            .anyRequest().authenticated()
+	        )
+	        .httpBasic(Customizer.withDefaults());
+	    return http.build();
 	}
 
 	@Bean
