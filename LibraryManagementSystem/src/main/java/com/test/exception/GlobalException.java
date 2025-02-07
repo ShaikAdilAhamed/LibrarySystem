@@ -50,7 +50,7 @@ public class GlobalException extends ResponseEntityExceptionHandler{
 		errorDetails.setDate(new Date());
 		errorDetails.setDetails(we.getDescription(false));
 		errorDetails.setMessage(exception.getMessage());
-		return new ResponseEntity<>(errorDetails,HttpStatus.INTERNAL_SERVER_ERROR);
+		return new ResponseEntity<>(errorDetails,HttpStatus.NOT_FOUND);
 	}
 	
 	

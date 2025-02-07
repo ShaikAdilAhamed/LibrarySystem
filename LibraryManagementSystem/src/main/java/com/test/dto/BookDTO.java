@@ -18,7 +18,6 @@ public class BookDTO {
 	@Size(min = 2, message = "ISBN should be atleast 2 characters minimum")
 	private String isbn;
 	private Integer id;
-	@NotNull
-	@Size(min = 1, message = "library_id is cannot be empty")
+	
 	private Integer library_id;
 }
